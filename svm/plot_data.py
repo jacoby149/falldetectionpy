@@ -10,7 +10,6 @@ WINDOW_SIZE = 10
 
 def load_data_from_csv(filepath):
     csv = pd.read_csv(filepath, usecols=["angle"], squeeze=True)
-    data = list(csv.values)
 
     train_data = []
     i = 0
