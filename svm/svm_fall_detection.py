@@ -1,21 +1,38 @@
 import pandas as pd
 from sklearn import svm
+import math
 
 
 WINDOW_SIZE = 10
 SLIDE_INTERVAL = 5
 
 
+
 def load_data_from_csv(filepath):
-    csv = pd.read_csv(filepath, usecols=["angle"], squeeze=True)
-    data = list(csv.values)
+    columns = ["x", "y", "z"]
+    csv = pd.read_csv(filepath, usecols=columns, squeeze=True)
+    num_rows = len(csv.index)
+    angles = []
+    magnitudes = []
+    for i in range(num_rows):
+        (x, y, z) = (csv.x[i], csv.y[i], csv.z[i])
+        magnitudes.append((x**2 + y**2 + z**2) ** 0.5)
+        angles.append(math.atan(z / ((x**2 + y**2) ** 0.5)))
+
+    # angles = list(csv.angle)
+    # magnitudes = list(csv.magnitude)
 
     train_data = []
     i = 0
-    while i < len(data):
-        if i+WINDOW_SIZE > len(data):
+    while i < len(angles):
+        if i+WINDOW_SIZE > len(angles):
             break
-        train_data.append(data[i:i+WINDOW_SIZE])
+        train_data.append(angles[i:i+WINDOW_SIZE])
+        i += SLIDE_INTERVAL
+    while i < len(magnitudes):
+        if i+WINDOW_SIZE > len(magnitudes):
+            break
+        train_data.append(magnitudes[i:i+WINDOW_SIZE])
         i += SLIDE_INTERVAL
 
     return train_data
@@ -43,7 +60,10 @@ bending = load_data_from_csv("./data/bending_and_standing.csv")
 sitting = load_data_from_csv("./data/sitting_down_standing_up.csv")
 back_fall = load_data_from_csv("./data/backfall.csv")
 running = load_data_from_csv("./data/running.csv")
+# falls = load_data_from_csv("./data/five_falls.csv")
 print(model.predict(bending))
 print(model.predict(sitting))
 print(model.predict(back_fall))
+print(model.predict(running))
+# print(model.predict(falls))
 
