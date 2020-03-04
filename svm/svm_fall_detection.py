@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn import svm
-
+from matplotlib import pyplot as plt
 
 WINDOW_SIZE = 10
 SLIDE_INTERVAL = 5
@@ -9,6 +9,8 @@ SLIDE_INTERVAL = 5
 def load_data_from_csv(filepath):
     csv = pd.read_csv(filepath, usecols=["angle"], squeeze=True)
     data = list(csv.values)
+    #plt.plot(data)
+    #plt.show()
 
     train_data = []
     i = 0
@@ -22,6 +24,7 @@ def load_data_from_csv(filepath):
 
 train_data = []
 train_result = []
+five_fall = load_data_from_csv("./data/five_fall.csv")
 forward_fall = load_data_from_csv("./data/forward_fall.csv")
 side_fall = load_data_from_csv("./data/s_fall.csv")
 walking = load_data_from_csv("./data/walking.csv")
