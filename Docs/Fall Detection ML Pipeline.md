@@ -29,3 +29,6 @@ These features have tunable parameters, and the PCA compression is also tunable.
 **Algorithm**
 
 Features are then fed into an SVM, and the performance of this SVM will be benchmarked using a  test and validation dataset. After doing multiple benchmarks on different parameter values of the features,  we will select the optimal parameter values for our features.
+
+
+
