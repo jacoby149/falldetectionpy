@@ -3,6 +3,7 @@ from sklearn import svm
 
 
 WINDOW_SIZE = 10
+SLIDE_INTERVAL = 5
 
 
 def load_data_from_csv(filepath):
@@ -15,7 +16,7 @@ def load_data_from_csv(filepath):
         if i+WINDOW_SIZE > len(data):
             break
         train_data.append(data[i:i+WINDOW_SIZE])
-        i += WINDOW_SIZE
+        i += SLIDE_INTERVAL
 
     return train_data
 
