@@ -1,8 +1,9 @@
 import pandas as pd
 import os
+import numpy as np
 
 WINDOW_SIZE = 10
-SLIDE_INTERVAL = 5
+SLIDE_INTERVAL = 2
 
 
 class Data():
@@ -35,5 +36,5 @@ def load_data_from_csv(filepath,cols):
         train_data.append(data[i:i+WINDOW_SIZE])
         i += SLIDE_INTERVAL
 
-    return train_data
+    return np.asarray(train_data)
 
