@@ -4,13 +4,6 @@ from load_data import *
 from matplotlib import pyplot as plt
 import numpy as np
 
-col = "magnitude"
-forward_fall = load_data_from_csv("./data/forward_fall.csv",col)
-side_fall = load_data_from_csv("./data/s_fall.csv",col)
-walking = load_data_from_csv("./data/walking.csv",col)
-jumping = load_data_from_csv("./data/jumping.csv",col)
-RESOLUTION = 2**3 - 1
-
 """ WAVELET WORKS BETTER, CAPTURES TEMPORAL CHANGES
 def STFT(data):
     for d in data:
@@ -54,8 +47,8 @@ def add_freq_features(data):
         d = data[i]
         w = W[i].flatten()
         print(d.shape,w.shape)
-        entry = np.append(d,w)
-        print(entry.shape)
+        entry = np.ndarray.tolist(np.append(d,w))
+        print(len(entry))
         result.append(entry)
     return result
 
@@ -65,5 +58,5 @@ def plot_all_features(data):
     #STFT(data)
     
 #PLOTS GRAPHS OF FREQUENCIES
-plot_all_features(forward_fall)
-add_freq_features(forward_fall)
+#plot_all_features(forward_fall)
+#add_freq_features(forward_fall)
